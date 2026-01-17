@@ -1,4 +1,4 @@
-package com.marv.taskmaster.models.DTO.response.user;
+package com.marv.taskmaster.models.dto.response.user;
 
 import lombok.Builder;
 import lombok.Data;

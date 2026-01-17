@@ -1,20 +1,21 @@
 package com.marv.taskmaster.controllers;
 
-import com.marv.taskmaster.models.DTO.response.generic.PagedData;
-import com.marv.taskmaster.models.DTO.response.generic.BaseResponse;
-import com.marv.taskmaster.models.DTO.response.user.UserDetailResponse;
-import com.marv.taskmaster.models.DTO.response.user.UsersResponse;
+import com.marv.taskmaster.models.dto.response.generic.PagedData;
+import com.marv.taskmaster.models.dto.response.generic.BaseResponse;
+import com.marv.taskmaster.models.dto.response.user.UserDetailResponse;
+import com.marv.taskmaster.models.dto.response.user.UsersResponse;
 import com.marv.taskmaster.models.docs.ErrorResponse;
 import com.marv.taskmaster.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +44,9 @@ public class UserController {
     })
     @GetMapping
     public ResponseEntity<BaseResponse<PagedData<UsersResponse>>> getAllUsers(
-            @Parameter(description = "Pagination controls (page, size, sort)")
-            @PageableDefault(size = 10) Pageable pageable) {
+            @ParameterObject
+            @PageableDefault(size = 10,sort = "createdAt",
+                    direction = Sort.Direction.DESC) Pageable pageable) {
 
         PagedData<UsersResponse> data = userService.getAllUsers(pageable);
 

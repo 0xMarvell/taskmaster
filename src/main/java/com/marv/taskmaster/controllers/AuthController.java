@@ -1,12 +1,12 @@
 package com.marv.taskmaster.controllers;
 
-import com.marv.taskmaster.models.DTO.request.auth.LoginRequest;
-import com.marv.taskmaster.models.DTO.request.auth.SignupRequest;
-import com.marv.taskmaster.models.DTO.response.auth.LoginResponse;
-import com.marv.taskmaster.models.DTO.response.auth.SignupResponse;
-import com.marv.taskmaster.models.DTO.response.generic.BaseResponse;
+import com.marv.taskmaster.models.dto.request.auth.LoginRequest;
+import com.marv.taskmaster.models.dto.request.auth.SignupRequest;
+import com.marv.taskmaster.models.dto.response.auth.LoginResponse;
+import com.marv.taskmaster.models.dto.response.auth.SignupResponse;
+import com.marv.taskmaster.models.dto.response.generic.BaseResponse;
 import com.marv.taskmaster.models.docs.ErrorResponse;
-import com.marv.taskmaster.services.UserService;
+import com.marv.taskmaster.services.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Authentication", description = "Endpoints for user registration and login")
 public class AuthController {
 
-    private final UserService userService;
+    private final AuthService authService;
 
     /* ================================================================
      * POST /api/v1/auth/signup
@@ -53,7 +53,7 @@ public class AuthController {
     })
     @PostMapping("/signup")
     public ResponseEntity<BaseResponse<SignupResponse>> signup(@Valid @RequestBody SignupRequest request) {
-        SignupResponse data = userService.signup(request);
+        SignupResponse data = authService.signup(request);
         return new ResponseEntity<>(
                 BaseResponse.success(data, "User registered successfully"),
                 HttpStatus.CREATED
@@ -75,7 +75,7 @@ public class AuthController {
     })
     @PostMapping("/login")
     public ResponseEntity<BaseResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest request) {
-        LoginResponse data = userService.login(request);
+        LoginResponse data = authService.login(request);
         return ResponseEntity.ok(
                 BaseResponse.success(data, "Login successful")
         );

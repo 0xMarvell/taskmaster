@@ -1,4 +1,4 @@
-package com.marv.taskmaster.models.DTO.request.auth;
+package com.marv.taskmaster.models.dto.request.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

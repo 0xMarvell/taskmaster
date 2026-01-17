@@ -1,4 +1,4 @@
-package com.marv.taskmaster.config;
+package com.marv.taskmaster.config.swagger;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

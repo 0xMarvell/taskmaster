@@ -1,4 +1,4 @@
-package com.marv.taskmaster.models.DTO.response.generic;
+package com.marv.taskmaster.models.dto.response.generic;
 
 import lombok.Data;
 import org.springframework.data.domain.Page;

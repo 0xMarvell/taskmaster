@@ -1,6 +1,6 @@
 package com.marv.taskmaster.exceptions;
 
-import com.marv.taskmaster.models.DTO.response.generic.BaseResponse;
+import com.marv.taskmaster.models.dto.response.generic.BaseResponse;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
