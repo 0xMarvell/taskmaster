@@ -94,9 +94,9 @@ public class ProjectController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse<ProjectResponse>> getProjectById(@PathVariable UUID id) {
-        ProjectResponse data = projectService.getProjectById(id);
+    @GetMapping("/{projectId}")
+    public ResponseEntity<BaseResponse<ProjectResponse>> getProjectById(@PathVariable UUID projectId) {
+        ProjectResponse data = projectService.getProjectById(projectId);
         return ResponseEntity.ok(
                 BaseResponse.success(data, "Project retrieved successfully")
         );
@@ -122,12 +122,12 @@ public class ProjectController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @PutMapping("/{id}")
+    @PutMapping("/{projectId}")
     public ResponseEntity<BaseResponse<ProjectResponse>> updateProject(
-            @PathVariable UUID id,
+            @PathVariable UUID projectId,
             @Valid @RequestBody UpdateProjectRequest request) {
 
-        ProjectResponse data = projectService.updateProject(id, request);
+        ProjectResponse data = projectService.updateProject(projectId, request);
         return ResponseEntity.ok(
                 BaseResponse.success(data, "Project updated successfully")
         );
@@ -149,9 +149,9 @@ public class ProjectController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @PostMapping("/{id}/cancel")
-    public ResponseEntity<BaseResponse<ProjectResponse>> cancelProject(@PathVariable UUID id) {
-        ProjectResponse data = projectService.cancelProject(id);
+    @PostMapping("/{projectId}/cancel")
+    public ResponseEntity<BaseResponse<ProjectResponse>> cancelProject(@PathVariable UUID projectId) {
+        ProjectResponse data = projectService.cancelProject(projectId);
         return ResponseEntity.ok(
                 BaseResponse.success(data, "Project cancelled successfully")
         );

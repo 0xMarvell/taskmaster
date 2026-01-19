@@ -31,10 +31,7 @@ public class ProjectService {
 
     private final ProjectRepository projectRepository;
 
-    /* =========================================================
-       1. Create Project
-       POST api/v1/projects
-       ========================================================= */
+
     public ProjectResponse createProject(CreateProjectRequest request) {
         User currentUser = getCurrentUser();
 
@@ -58,29 +55,20 @@ public class ProjectService {
         return mapToResponse(savedProject);
     }
 
-    /* =========================================================
-       2. Get All User's Projects
-       GET api/v1/projects
-       ========================================================= */
+
     public PagedData<ProjectResponse> getMyProjects(Pageable pageable) {
         User currentUser = getCurrentUser();
         Page<Project> projectsPage = projectRepository.findByOwnerId(currentUser.getId(), pageable);
         return new PagedData<>(projectsPage.map(this::mapToResponse));
     }
 
-    /* =========================================================
-       3. Get Single Project
-       GET api/v1/projects/{id}
-       ========================================================= */
+
     public ProjectResponse getProjectById(UUID projectId) {
         Project project = getProjectSecurely(projectId);
         return mapToResponse(project);
     }
 
-    /* =========================================================
-       4. Update Project
-       PUT api/v1/projects/{id}
-       ========================================================= */
+
     public ProjectResponse updateProject(UUID projectId, UpdateProjectRequest request) {
         Project project = getProjectSecurely(projectId);
 
@@ -98,10 +86,7 @@ public class ProjectService {
         return mapToResponse(updatedProject);
     }
 
-    /* =========================================================
-       5. Cancel Project
-       POST api/v1/projects/{id}/cancel
-       ========================================================= */
+
     public ProjectResponse cancelProject(UUID projectId) {
         Project project = getProjectSecurely(projectId);
 
@@ -117,9 +102,7 @@ public class ProjectService {
         return mapToResponse(savedProject);
     }
 
-    // =========================================================
-    // Private Helpers
-    // =========================================================
+    // --- Private Helpers ---
 
     private User getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -135,7 +118,6 @@ public class ProjectService {
                 .orElseThrow(() -> new EntityNotFoundException("Project not found or access denied"));
     }
 
-    // --- Mappers ---
 
     private ProjectResponse mapToResponse(Project project) {
         return ProjectResponse.builder()

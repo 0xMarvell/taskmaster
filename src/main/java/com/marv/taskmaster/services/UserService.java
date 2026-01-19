@@ -25,8 +25,6 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    // NO AuthenticationManager, JwtService, or PasswordEncoder here!
-    // This breaks the circular dependency.
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -34,10 +32,6 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
         return new CustomUserDetails(user);
     }
-
-    /* =========================================================
-       Read-Only / Management Operations
-       ========================================================= */
 
     public PagedData<UsersResponse> getAllUsers(Pageable pageable) {
         Page<User> userPage = userRepository.findAll(pageable);

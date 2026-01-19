@@ -71,9 +71,9 @@ public class UserController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse<UserDetailResponse>> getUserById(@PathVariable UUID id) {
-        UserDetailResponse data = userService.getUserById(id);
+    @GetMapping("/{userId}")
+    public ResponseEntity<BaseResponse<UserDetailResponse>> getUserById(@PathVariable UUID userId) {
+        UserDetailResponse data = userService.getUserById(userId);
 
         return ResponseEntity.ok(
                 BaseResponse.success(data, "User details retrieved successfully")

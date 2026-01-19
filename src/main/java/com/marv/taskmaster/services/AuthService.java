@@ -30,9 +30,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    /* =========================================================
-       Signup Logic
-       ========================================================= */
+
     public SignupResponse signup(SignupRequest request) {
         try {
             if (userRepository.existsByEmail(request.getEmail())) {
@@ -66,9 +64,7 @@ public class AuthService {
         }
     }
 
-    /* =========================================================
-       Login Logic
-       ========================================================= */
+
     public LoginResponse login(LoginRequest request) {
         try {
             authenticationManager.authenticate(
@@ -103,7 +99,7 @@ public class AuthService {
         }
     }
 
-    // --- Private Helpers (Duplicated here to keep services independent) ---
+    // --- Private Helpers ---
 
     private UserDetailResponse mapToDetailResponse(User user) {
         return UserDetailResponse.builder()
