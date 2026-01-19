@@ -1,5 +1,6 @@
 package com.marv.taskmaster.models.entities;
 
+import com.marv.taskmaster.models.enums.ProjectStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -25,4 +26,7 @@ public class Project extends BaseEntity {
     // One Project has many Tasks
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
+
+    @Enumerated(EnumType.STRING)
+    private ProjectStatus status = ProjectStatus.IN_PROGRESS;
 }

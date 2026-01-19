@@ -19,13 +19,20 @@ public class Task extends BaseEntity {
 
     private String description;
 
-    @Enumerated(EnumType.STRING) // Stores "PENDING" as text in DB, not 0/1/2
-    private TaskStatus status;
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status = TaskStatus.PENDING;
 
     private LocalDateTime dueDate;
+
+    private boolean isOverdue = false;
 
     // Many Tasks belong to One Project
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
+
+    // Assigned To (The User responsible for the task)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assignee_id")
+    private User assignee;
 }
